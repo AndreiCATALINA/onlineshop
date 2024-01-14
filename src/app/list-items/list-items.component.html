@@ -1,0 +1,11 @@
+<mat-card *ngFor="let item of items" class="card-item">
+  <mat-card-content>
+    <p>Title: {{item.title}} </p>
+    <p>Description: {{item.description}}</p>
+    <p>Price: {{item.price}}</p>
+    <div>
+      <button mat-raised-button color="primary" class="btn-action" (click)="onEdit()">Edit</button>
+      <button mat-raised-button color="accent" class="btn-action" (click)="onDelete()">Delete</button>
+    </div>
+  </mat-card-content>
+</mat-card>
