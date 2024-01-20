@@ -1,4 +1,3 @@
-
 <mat-drawer-container class="drawer-container" autosize>
   <mat-drawer #drawer class="drawer-sidenav" mode="side">
 
@@ -11,9 +10,9 @@
         <p>Andrei</p>
       </mat-card-content>
     </mat-card>
-    <mat-card class="card-menu-button" (click)="onHome()">
+    <mat-card class="card-menu-button" (click)="onDashboard()">
       <mat-card-content>
-        <p>Home</p>
+        <p>Dashboard</p>
       </mat-card-content>
     </mat-card>
     <mat-card class="card-menu-button" (click)="onLogOut()">
@@ -38,10 +37,7 @@
       </button>
     </mat-toolbar>
 
-    <!--[item] reprezinta @Input("item") din componenta de add-edit-item-->
-    <app-add-edit-item [item]="itemData"></app-add-edit-item>
-    <!--(changeData) reprezinta @Output din componenta de list-items-->
-    <app-list-items (changeData)="onChangeItem($event)" [isAdmin]="true"></app-list-items>
+    <app-list-items [isAdmin]="false"></app-list-items>
   </div>
 
 </mat-drawer-container>

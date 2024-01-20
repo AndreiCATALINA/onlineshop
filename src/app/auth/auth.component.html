@@ -1,10 +1,10 @@
-<div [ngSwitch]="viewType">
+<div [ngSwitch]="viewType" class="auth-div">
   <mat-card class="card-container" *ngSwitchCase="'login'">
     <mat-card-content>
       <div class="input-container">
         <mat-form-field class="input-field">
           <mat-label>Email</mat-label>
-          <input matInput placeholder="iPhone" [formControl]="email" required>
+          <input matInput placeholder="test@test.com" [formControl]="email" required>
           @if (email.invalid) {
             <mat-error>{{getErrorMessage(email)}}</mat-error>
           }
@@ -13,8 +13,8 @@
 
       <div class="input-container">
         <mat-form-field class="input-field">
-          <mat-label>password</mat-label>
-          <input matInput placeholder="99.99 EUR" [formControl]="password" required>
+          <mat-label>Password</mat-label>
+          <input matInput type="password" [formControl]="password" required>
           @if (password.invalid) {
             <mat-error>{{getErrorMessage(password)}}</mat-error>
           }
@@ -31,8 +31,8 @@
   <mat-card-content>
     <div class="input-container">
       <mat-form-field class="input-field">
-        <mat-label>email</mat-label>
-        <input matInput placeholder="iPhone" [formControl]="email" required>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="test@test.com" [formControl]="email" required>
         @if (email.invalid) {
           <mat-error>{{getErrorMessage(email)}}</mat-error>
         }
@@ -40,8 +40,8 @@
     </div>
     <div class="input-container">
       <mat-form-field class="input-field">
-        <mat-label>userName</mat-label>
-        <input matInput placeholder="128GB color:Black" [formControl]="userName" required>
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Test.test" [formControl]="userName" required>
         @if (userName.invalid) {
           <mat-error>{{getErrorMessage(userName)}}</mat-error>
         }
@@ -49,8 +49,8 @@
     </div>
     <div class="input-container">
       <mat-form-field class="input-field">
-        <mat-label>password</mat-label>
-        <input matInput placeholder="99.99 EUR" [formControl]="password" required>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [formControl]="password" required>
         @if (password.invalid) {
           <mat-error>{{getErrorMessage(password)}}</mat-error>
         }
@@ -58,8 +58,8 @@
     </div>
     <div class="input-container">
       <mat-form-field class="input-field">
-        <mat-label>retype password</mat-label>
-        <input matInput placeholder="Image URL" [formControl]="retypePassword" required>
+        <mat-label>Retype Password</mat-label>
+        <input matInput type="password" [formControl]="retypePassword" required>
         @if (retypePassword.invalid) {
           <mat-error>{{getErrorMessage(retypePassword)}}</mat-error>
         }

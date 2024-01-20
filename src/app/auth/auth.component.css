@@ -6,10 +6,15 @@
 }
 .card-container{
   width:400px;
+  margin: auto;
 }
 .div-buttons-container{
   display: flex;
 }
 .btn-save{
   margin: auto;
+}
+.auth-div{
+  display: flex;
+  height: 100%;
 }
