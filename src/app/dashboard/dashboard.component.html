@@ -1,3 +1,5 @@
 <p>dashboard works!</p>
-<app-add-edit-item></app-add-edit-item>
-<app-list-items></app-list-items>
+<!--[item] reprezinta @Input("item") din componenta de add-edit-item-->
+<app-add-edit-item [item]="itemData"></app-add-edit-item>
+<!--(changeData) reprezinta @Output din componenta de list-items-->
+<app-list-items (changeData)="onChangeItem($event)" [isAdmin]="false"></app-list-items>

@@ -13,5 +13,12 @@ import {ListItemsComponent} from "../list-items/list-items.component";
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
+  itemData : any;
 
+  onChangeItem(item : any){
+    console.log("Item a ajuns in dashboard");
+    console.log(item);
+    //salvam itemul primit in componenta de dashboard
+    this.itemData = item;
+  }
 }

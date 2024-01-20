@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ItemService} from "../services/item.service";
 import {MatCardModule} from "@angular/material/card";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 
 @Component({
@@ -10,26 +10,33 @@ import {MatButtonModule} from "@angular/material/button";
   imports: [
     MatCardModule,
     NgForOf,
-    MatButtonModule
+    MatButtonModule,
+    NgIf
   ],
   templateUrl: './list-items.component.html',
   styleUrl: './list-items.component.css'
 })
 export class ListItemsComponent {
+  @Output() changeData = new EventEmitter<any>();// EventEmitter ne ajuta sa transmitem obiecte inafara componentei
+  items: Array<any> = [];
+  @Input("isAdmin") isAdmin : boolean = false;
 
-  items:Array<any>=[];
-
-  constructor(private itemService:ItemService){
-    setTimeout(()=>{
-      this.items=itemService.items;
-    },2000)
-
-  }
-
-  onEdit(){
+  constructor(private itemService: ItemService) {
+    this.itemService.getItemList().subscribe((itemsList: Array<any>) => {
+      this.items = itemsList; //prin acest subscribe ne asiguram ca vom primi notificari despre lista in timp real
+    })
 
   }
-  onDelete(){
+
+  onEdit(item: any) {
+    this.changeData.emit(item);
+  }
+
+  onDelete(item: any) {
+    console.log(item);
+    this.itemService.deleteItem(item);
+  }
+  onBuy(item :any){
 
   }
 }

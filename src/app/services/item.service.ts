@@ -1,15 +1,20 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemService {
+  private itemObservable = new BehaviorSubject<Array<any>>([]);
   private apiUrl = "https://api.codebyte-software.com:2323/api/items";
-  items: Array<any> = [];
 
   constructor(private httpClient: HttpClient) {
-  this.readItems();
+    this.readItems();
+  }
+
+  getItemList() {
+    return this.itemObservable.asObservable();
   }
 
   createItem(item: any) {
@@ -22,8 +27,7 @@ export class ItemService {
       console.log(response);
       console.log(response.message);
 
-      let itemFromDb = response.data;
-      this.items.push(itemFromDb);
+      this.readItems();// se actualizeaza lista de elemente la fiecare adaugare
     })
   }
 
@@ -32,21 +36,22 @@ export class ItemService {
       console.log(response);
       console.log(response.message);
 
-      let itemFromDb = response.data;
-      this.items.push(itemFromDb);
+      this.readItems();
     })
   }
 
   deleteItem(item: any) {
-
+  this.httpClient.delete(`${this.apiUrl}/${item.id}`).subscribe((response: any)=> {
+    console.log(response);
+    this.readItems();
+  })
   }
 
   readItems() {
-  this.httpClient.get(this.apiUrl).subscribe((response:any) =>{
-    this.items = [];
-    this.items=response.data;
-    console.log(response);
-  })
+    this.httpClient.get(this.apiUrl).subscribe((response: any) => {
+      this.itemObservable.next(response.data);//lambda expresion (trimite notificari catre toti care au dat subscribe)
+      console.log(response);
+    })
   }
 
 }

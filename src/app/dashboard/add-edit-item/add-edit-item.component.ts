@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -17,28 +17,61 @@ import {ItemService} from "../../services/item.service";
   templateUrl: './add-edit-item.component.html',
   styleUrl: './add-edit-item.component.css'
 })
-export class AddEditItemComponent {
-  title = new FormControl('', [Validators.required]);
-  description = new FormControl('',[Validators.required]);
-  price=new FormControl('',[Validators.required]);
-  imageUrl=new FormControl('',[Validators.required]);
+export class AddEditItemComponent implements OnChanges {
+  @Input("item") item: any;
 
-  constructor(private itemService:ItemService) {
+  id: string = "";
+  title = new FormControl('', [Validators.required]);
+  description = new FormControl('', [Validators.required]);
+  price = new FormControl('', [Validators.required]);
+  imageUrl = new FormControl('', [Validators.required]);
+
+  constructor(private itemService: ItemService) {
   }
-  getErrorMessage(input:FormControl):string {
+
+  //se apeleaza de fiecare data cand se schimba itemul de sus
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("Item a ajuns in Add edit component");
+    console.log(this.item);
+    if (this.item != null) {
+      this.id = this.item.id;
+      this.title = new FormControl(this.item.title, [Validators.required]);
+      this.description = new FormControl(this.item.description, [Validators.required]);
+      this.price = new FormControl(this.item.price, [Validators.required]);
+      this.imageUrl = new FormControl(this.item.imageUrl, [Validators.required]);
+    }
+  }
+
+  getErrorMessage(input: FormControl): string {
     if (input.hasError('required')) {
       return 'You must enter a value';
     }
     return '';
   }
-  onSave():void{
+
+  onSave(): void {
     let itemData = {
-      title:this.title.getRawValue()!,
-      description:this.description.getRawValue()!,
-      price:this.price.getRawValue()!,
-      imageUrl:this.imageUrl.getRawValue()!
+      id: this.id,
+      title: this.title.getRawValue()!,
+      description: this.description.getRawValue()!,
+      price: this.price.getRawValue()!,
+      imageUrl: this.imageUrl.getRawValue()!
     };
     console.log(itemData);
-    this.itemService.createItem(itemData);
+    if (itemData.id == "") {
+      this.itemService.createItem(itemData);
+    } else {
+      this.itemService.updateItem(itemData);
+    }
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.item = null;
+    this.id = "";
+    this.title = new FormControl('', [Validators.required]);
+    this.description = new FormControl('', [Validators.required]);
+    this.price = new FormControl('', [Validators.required]);
+    this.imageUrl = new FormControl('', [Validators.required]);
   }
 }
