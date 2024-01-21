@@ -3,6 +3,7 @@ import {ItemService} from "../services/item.service";
 import {MatCardModule} from "@angular/material/card";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
+import {CartService} from "../services/cart.service";
 
 @Component({
   selector: 'app-list-items',
@@ -21,7 +22,7 @@ export class ListItemsComponent {
   items: Array<any> = [];
   @Input("isAdmin") isAdmin : boolean = false;
 
-  constructor(private itemService: ItemService) {
+  constructor(private itemService: ItemService,private cartService:CartService) {
     this.itemService.getItemList().subscribe((itemsList: Array<any>) => {
       this.items = itemsList; //prin acest subscribe ne asiguram ca vom primi notificari despre lista in timp real
     })
@@ -37,6 +38,6 @@ export class ListItemsComponent {
     this.itemService.deleteItem(item);
   }
   onBuy(item :any){
-
+   this.cartService.addToCart(item);
   }
 }

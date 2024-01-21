@@ -24,3 +24,10 @@
   height: 200px;
   margin: auto;
 }
+.img-banner{
+  width: 30%;
+  margin: 16px;
+  height: 200px;
+  border-radius: 5px;
+  object-fit: cover;
+}
