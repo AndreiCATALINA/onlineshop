@@ -6,6 +6,8 @@ import {MatInputModule} from "@angular/material/input";
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgSwitch, NgSwitchCase} from "@angular/common";
 import {AuthService} from "../services/auth.service";
+import {UserService} from "../services/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth',
@@ -30,7 +32,7 @@ export class AuthComponent {
   password = new FormControl('', [Validators.required]);
   retypePassword = new FormControl('', [Validators.required]);
 
-  constructor(private authService: AuthService){
+  constructor(private authService: AuthService, private userService: UserService, private router: Router){
 
   }
   getErrorMessage(input: FormControl): string {
@@ -48,8 +50,13 @@ export class AuthComponent {
     console.log(data);
     this.authService.logIn(data).subscribe((response:any)=>{
       console.log(response);
-    },(error)=>{
-      alert(error.message);
+      if(response.status == 200){
+        this.userService.setUser(response.data);
+
+        this.router.navigate(['/','home']);
+      }
+    },(responseError)=>{
+      alert(responseError.error.message);
     })
   }
 
@@ -58,13 +65,15 @@ export class AuthComponent {
       var data = {
         email: this.email.getRawValue()!,
         username: this.userName.getRawValue()!,
-        password: this.password.getRawValue()!
+        password: this.password.getRawValue()!,
+        confirmPassword: this.retypePassword.getRawValue()!
       };
       console.log(data);
       this.authService.register(data).subscribe((response: any)=>{
         console.log(response);
-      },(error)=>{
-        alert(error.message);
+      },(responseError)=>{
+        console.log(responseError.error.message);
+        alert(responseError.error.message);
       })
     }else{
       alert("Passwords not match");
