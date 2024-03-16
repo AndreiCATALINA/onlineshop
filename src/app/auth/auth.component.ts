@@ -51,7 +51,7 @@ export class AuthComponent {
     this.authService.logIn(data).subscribe((response:any)=>{
       console.log(response);
       if(response.status == 200){
-        this.userService.setUser(response.data);
+        this.userService.setLoggedUser(response.data);
 
         this.router.navigate(['/','home']);
       }

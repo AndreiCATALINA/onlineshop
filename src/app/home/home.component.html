@@ -10,7 +10,7 @@
         <p>Andrei</p>
       </mat-card-content>
     </mat-card>
-    <mat-card class="card-menu-button" (click)="onDashboard()">
+    <mat-card class="card-menu-button" *ngIf="isUserAdmin()" (click)="onDashboard()">
       <mat-card-content>
         <p>Dashboard</p>
       </mat-card-content>

@@ -4,6 +4,8 @@ import {MatCardModule} from "@angular/material/card";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {CartService} from "../services/cart.service";
+import {UserService} from "../services/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-list-items',
@@ -20,9 +22,9 @@ import {CartService} from "../services/cart.service";
 export class ListItemsComponent {
   @Output() changeData = new EventEmitter<any>();// EventEmitter ne ajuta sa transmitem obiecte inafara componentei
   items: Array<any> = [];
-  @Input("isAdmin") isAdmin : boolean = false;
+  @Input("isAdmin") isAdmin: boolean = false;
 
-  constructor(private itemService: ItemService,private cartService:CartService) {
+  constructor(private itemService: ItemService, private cartService: CartService, private userService: UserService, private router: Router) {
     this.itemService.getItemList().subscribe((itemsList: Array<any>) => {
       this.items = itemsList; //prin acest subscribe ne asiguram ca vom primi notificari despre lista in timp real
     })
@@ -37,7 +39,13 @@ export class ListItemsComponent {
     console.log(item);
     this.itemService.deleteItem(item);
   }
-  onBuy(item :any){
-   this.cartService.addToCart(item);
+
+  onBuy(item: any) {
+    if (this.userService.getLoggedUser() != null) {
+      this.cartService.addToCart(item);
+    } else {
+      alert("Utilizatorul nu este logat, trebuie sa te loghezi inainte sa adaugi produse in cos");
+      this.router.navigate(["/", "auth"]);
+    }
   }
 }

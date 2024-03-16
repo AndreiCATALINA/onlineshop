@@ -11,9 +11,14 @@ export class UserService {
   private userObservable = new BehaviorSubject([]);
 
   constructor(private httpClient:HttpClient) {
+    this.readUsers();
   }
-  public setUser(user:any){
+  public setLoggedUser(user:any){
     this.user = user;
+  }
+
+  public getLoggedUser(){
+    return this.user;
   }
 
   getUserList() {
