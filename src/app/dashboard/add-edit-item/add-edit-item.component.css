@@ -5,7 +5,8 @@
   width: 100%;
 }
 .card-container{
-  width:400px;
+  margin:auto;
+  width:700px;
 }
 .div-buttons-container{
   display: flex;
@@ -13,4 +14,17 @@
 .btn-save{
   margin: auto;
 }
-
+.steps{
+  width: 40vw;
+  height: 300px;
+}
+.overview{
+  width: 55vw;
+  height: 300px;
+}
+.title{
+  width: 40vw;
+}
+.expected{
+  width: 40vw;
+}

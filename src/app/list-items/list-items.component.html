@@ -1,18 +1,17 @@
 <div class="page-view">
-  <mat-card *ngFor="let item of items" class="card-item">
-    <img [src]="item.image" class="image"/>
+  <mat-card *ngFor="let bug of items" class="card-item">
+    <img [src]="bug.image" class="image"/>
     <mat-card-content>
 
-      <p class="p-title">{{ item.name }} </p>
-      <p class="p-description">Description: {{ item.description }}</p>
-      <p >Price:<span class="p-price">{{ item.price }} RON</span></p>
+      <p class="p-title">{{ bug.title }} </p>
+      <p class="p-bug-info">Severity: {{ bug.severity }}</p>
+      <p class="p-bug-info">Overview: {{ bug.overview }}</p>
+      <p class="p-bug-info">Steps to reproduce: {{ bug.stepsToReproduce }}</p>
+      <p class="p-bug-info">Expected results: {{ bug.expectedResults }}</p>
       <div *ngIf="isAdmin" class="div-admin-controls">
-        <button mat-raised-button color="primary" class="btn-action" (click)="onEdit(item)">Edit</button>
+        <button mat-raised-button color="primary" class="btn-action" (click)="onEdit(bug)">Edit</button>
         <div style="height: 16px"></div>
-        <button mat-raised-button color="accent" class="btn-action" (click)="onDelete(item)">Delete</button>
-      </div>
-      <div *ngIf="!isAdmin" class="div-controls">
-        <button mat-raised-button color="primary" class="btn-buy" (click)="onBuy(item)">Buy</button>
+        <button mat-raised-button color="accent" class="btn-action" (click)="onDelete(bug)">Delete</button>
       </div>
     </mat-card-content>
   </mat-card>

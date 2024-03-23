@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let user = this.userService.getLoggedUser();
 
-    if (user != null && user.userRole == "ADMIN") { // aici putem verifica daca utilizatorul logat este admin sau nu
+    if (user != null) {
       return true;
     } else {
       this.router.navigateByUrl('/auth');

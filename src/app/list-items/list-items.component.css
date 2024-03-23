@@ -1,6 +1,7 @@
 .card-item{
   width: 30%;
   margin: 16px;
+
 }
 .image{
   width: 100%;
@@ -26,10 +27,9 @@
   font-weight: bold;
   margin-top: 16px;
 }
-.p-description{
+.p-bug-info{
   font-size: 14px;
   font-style: italic;
 }
-.p-price{
-  font-weight: bold;
-}
+
+

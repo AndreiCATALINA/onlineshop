@@ -1,0 +1,22 @@
+<div class="page-view">
+  <mat-card *ngFor="let project of projects" class="card-user">
+    <mat-card-content>
+      <p class="p-text">Project id: {{ project.id }}</p>
+      <p class="p-name">Project name: {{ project.projectName }} </p>
+      <p class="p-text">Description: {{ project.description }}</p>
+      <p class="p-text">Budget: {{ project.budget }}</p>
+      <p class="p-text">Status: {{ project.status }}</p>
+
+
+      <div style="display: flex" *ngFor="let item of project.users">
+        <img [src]="item.image" class="img-preview"/>
+
+      </div>
+
+      <div class="div-admin-controls">
+        <button mat-raised-button color="accent" class="btn-action" (click)="onDelete(project)">Delete</button>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>

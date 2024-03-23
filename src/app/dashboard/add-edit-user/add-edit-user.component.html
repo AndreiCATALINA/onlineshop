@@ -49,8 +49,8 @@
       <mat-form-field class="input-field">
         <mat-label>User role</mat-label>
         <mat-select [formControl]="userRole">
-          <mat-option value="CUSTOMER">Customer</mat-option>
-          <mat-option value="ADMIN">Admin</mat-option>
+          <mat-option value="QA">QA</mat-option>
+          <mat-option value="DEVELOPER">DEVELOPER</mat-option>
         </mat-select>
         @if (userRole.invalid) {
           <mat-error>{{getErrorMessage(userRole)}}</mat-error>

@@ -3,7 +3,7 @@ import {ItemService} from "../services/item.service";
 import {MatCardModule} from "@angular/material/card";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
-import {CartService} from "../services/cart.service";
+import {ProjectService} from "../services/project.service";
 import {UserService} from "../services/user.service";
 import {Router} from "@angular/router";
 
@@ -24,7 +24,7 @@ export class ListItemsComponent {
   items: Array<any> = [];
   @Input("isAdmin") isAdmin: boolean = false;
 
-  constructor(private itemService: ItemService, private cartService: CartService, private userService: UserService, private router: Router) {
+  constructor(private itemService: ItemService, private cartService: ProjectService, private userService: UserService, private router: Router) {
     this.itemService.getItemList().subscribe((itemsList: Array<any>) => {
       this.items = itemsList; //prin acest subscribe ne asiguram ca vom primi notificari despre lista in timp real
     })
@@ -40,12 +40,12 @@ export class ListItemsComponent {
     this.itemService.deleteItem(item);
   }
 
-  onBuy(item: any) {
-    if (this.userService.getLoggedUser() != null) {
-      this.cartService.addToCart(item);
-    } else {
-      alert("Utilizatorul nu este logat, trebuie sa te loghezi inainte sa adaugi produse in cos");
-      this.router.navigate(["/", "auth"]);
-    }
-  }
+  // onBuy(item: any) {
+  //   if (this.userService.getLoggedUser() != null) {
+  //     this.userService.getLoggedUser();
+  //   } else {
+  //     alert("Utilizatorul nu este logat, trebuie sa te loghezi inainte sa adaugi produse in cos");
+  //     this.router.navigate(["/", "auth"]);
+  //   }
+  // }
 }

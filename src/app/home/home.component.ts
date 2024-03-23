@@ -6,7 +6,6 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {Router} from "@angular/router";
 import {ListItemsComponent} from "../list-items/list-items.component";
-import {CartButtonComponent} from "./cart-button/cart-button.component";
 import {UserService} from "../services/user.service";
 import {NgIf} from "@angular/common";
 
@@ -20,7 +19,6 @@ import {NgIf} from "@angular/common";
     MatIconModule,
     MatCardModule,
     ListItemsComponent,
-    CartButtonComponent,
     NgIf
   ],
   templateUrl: './home.component.html',
@@ -32,7 +30,7 @@ export class HomeComponent {
 
   }
   isUserAdmin(){
-    if(this.userService.getLoggedUser() != null && this.userService.getLoggedUser().userRole == "ADMIN"){
+    if(this.userService.getLoggedUser() != null){
       return true;
     }
     return false;

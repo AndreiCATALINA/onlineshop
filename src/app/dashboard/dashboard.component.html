@@ -1,14 +1,13 @@
-
 <mat-drawer-container class="drawer-container" autosize>
   <mat-drawer #drawer class="drawer-sidenav" mode="side">
 
     <div class="div-logo">
       <img class="img-logo"
-           src="https://img.freepik.com/premium-vector/colorful-bird-illustration-gradient-abstract_343694-1740.jpg"/>
+           src="https://cdn.icon-icons.com/icons2/2072/PNG/512/bug_danger_data_internet_malware_security_virus_icon_127084.png"/>
     </div>
     <mat-card class="card-menu-button">
-      <mat-card-content>
-        <p>Andrei</p>
+      <mat-card-content class="name-app">
+        <p>Bug Hive</p>
       </mat-card-content>
     </mat-card>
     <mat-card class="card-menu-button" (click)="onHome()">
@@ -28,27 +27,28 @@
       <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>My App</span>
-      <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-icon-button class="example-icon">
-        <mat-icon>share</mat-icon>
-      </button>
+      <span>Bug Hive</span>
     </mat-toolbar>
 
-    <app-list-orders></app-list-orders>
+    <mat-tab-group class="edit" >
+      <mat-tab label="Add projects" *ngIf="isUserDeveloper()">
+         <app-add-edit-project ></app-add-edit-project>
+         <app-list-projects></app-list-projects>
 
-    <app-add-edit-user [user]="userData"></app-add-edit-user>
+      </mat-tab>
+      <mat-tab label="Add Edit users" *ngIf="isUserDeveloper()">
+        <app-add-edit-user [user]="userData"></app-add-edit-user>
+        <app-list-users (changeUserData)="onChangeUser($event)"></app-list-users>
+      </mat-tab>
+      <mat-tab label="Add Edit Bugs">
+        <!--[item] reprezinta @Input("item") din componenta de add-edit-item-->
+        <app-add-edit-item [item]="itemData"></app-add-edit-item>
 
-    <app-list-users (changeUserData)="onChangeUser($event)"></app-list-users>
+        <!--(changeData) reprezinta @Output din componenta de list-items-->
+        <app-list-items (changeData)="onChangeItem($event)" [isAdmin]="true"></app-list-items>
 
-    <!--[item] reprezinta @Input("item") din componenta de add-edit-item-->
-    <app-add-edit-item [item]="itemData"></app-add-edit-item>
-
-    <!--(changeData) reprezinta @Output din componenta de list-items-->
-    <app-list-items (changeData)="onChangeItem($event)" [isAdmin]="true"></app-list-items>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 
 </mat-drawer-container>

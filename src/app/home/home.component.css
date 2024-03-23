@@ -5,10 +5,12 @@
 
 .drawer-sidenav-content {
   height: 100%;
+  background-image: url("https://img.freepik.com/premium-vector/abstract-pattern-background-with-futuristic-modern-style-concept_7505-2428.jpg?size=626&ext=jpg");
 }
 
 .drawer-sidenav {
   padding: 20px;
+  background-color: aliceblue;
 }
 
 .card-menu-button {
@@ -30,4 +32,9 @@
   height: 200px;
   border-radius: 5px;
   object-fit: cover;
+}
+
+.name-app{
+  margin: auto;
+  font-weight: bolder;
 }

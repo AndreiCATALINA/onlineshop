@@ -38,9 +38,7 @@ export class AddEditUserComponent implements OnChanges {
   constructor(private userService: UserService) {
   }
 
-  //se apeleaza de fiecare data cand se schimba itemul de sus
   ngOnChanges(changes: SimpleChanges) {
-    console.log("User a ajuns in Add edit component");
     console.log(this.user);
     if (this.user != null) {
       this.id = this.user.id;

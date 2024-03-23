@@ -1,0 +1,45 @@
+<mat-card class="card-container">
+  <mat-card-content>
+    <div class="input-container">
+      <mat-form-field class="input-field">
+        <mat-label>Project Name</mat-label>
+        <input matInput placeholder="Apollo" [formControl]="projectName" required>
+        @if (projectName.invalid) {
+          <mat-error>{{getErrorMessage(projectName)}}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="input-container">
+      <mat-form-field class="input-field">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="The scope of the project is..." [formControl]="description" required>
+        @if (description.invalid) {
+          <mat-error>{{getErrorMessage(description)}}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="input-container">
+      <mat-form-field class="input-field">
+        <mat-label>Budget</mat-label>
+        <input matInput placeholder="123341" [formControl]="budget" required>
+        @if (budget.invalid) {
+          <mat-error>{{getErrorMessage(budget)}}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="input-container">
+      <mat-form-field class="input-field">
+        <mat-label>Status</mat-label>
+        <input matInput placeholder="Ongoing" [formControl]="status" required>
+        @if (status.invalid) {
+          <mat-error>{{getErrorMessage(status)}}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="div-buttons-container">
+      <button mat-raised-button color="primary" class="btn-save" (click)="onSave()">Create</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+

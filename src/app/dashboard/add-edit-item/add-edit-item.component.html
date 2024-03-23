@@ -1,44 +1,102 @@
 <mat-card class="card-container">
   <mat-card-content>
-    <div class="input-container">
-      <mat-form-field class="input-field">
-        <mat-label>Title</mat-label>
-        <input matInput placeholder="iPhone" [formControl]="title" required>
-        @if (title.invalid) {
-          <mat-error>{{getErrorMessage(title)}}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-    <div class="input-container">
-      <mat-form-field class="input-field">
-        <mat-label>Description</mat-label>
-        <input matInput placeholder="128GB color:Black" [formControl]="description" required>
-        @if (description.invalid) {
-          <mat-error>{{getErrorMessage(description)}}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-    <div class="input-container">
-      <mat-form-field class="input-field">
-        <mat-label>Price</mat-label>
-        <input matInput placeholder="99.99 EUR" [formControl]="price" required>
-        @if (price.invalid) {
-          <mat-error>{{getErrorMessage(price)}}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-    <div class="input-container">
-      <mat-form-field class="input-field">
-        <mat-label>Image</mat-label>
-        <input matInput placeholder="Image URL" [formControl]="imageUrl" required>
-        @if (imageUrl.invalid) {
-          <mat-error>{{getErrorMessage(imageUrl)}}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-    <div class="div-buttons-container">
-      <button mat-raised-button color="primary" class="btn-save" (click)="onSave()">Save</button>
-    </div>
+    <mat-stepper orientation="vertical" #stepper>
+      <mat-step [stepControl]="title">
+
+        <ng-template matStepLabel>Insert the bug title</ng-template>
+        <mat-form-field class="title">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Last name, First name" [formControl]="title" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+      </mat-step>
+      <mat-step [stepControl]="overview">
+
+        <ng-template matStepLabel>Overview</ng-template>
+        <mat-form-field class="overview">
+          <mat-label>Overview</mat-label>
+          <input matInput placeholder="Brief description" [formControl]="overview"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+      </mat-step>
+      <mat-step [stepControl]="stepsToReproduce">
+
+        <ng-template matStepLabel>Steps to reproduce</ng-template>
+        <mat-form-field class="steps">
+          <mat-label>Steps</mat-label>
+
+          <textarea matInput placeholder="How can we repro it?" [formControl]="stepsToReproduce"
+                    required></textarea>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+      </mat-step>
+      <mat-step [stepControl]="expectedResults">
+
+        <ng-template matStepLabel>Expected results</ng-template>
+        <mat-form-field class="expected">
+          <mat-label>Expected</mat-label>
+          <input matInput placeholder="Expected behaviour" [formControl]="expectedResults"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+      </mat-step>
+      <mat-step [stepControl]="severity">
+
+        <ng-template matStepLabel>Severity</ng-template>
+        <mat-form-field>
+          <mat-label>Severity</mat-label>
+          <mat-select [formControl]="severity">
+            <mat-option value="BLOCKER">BLOCKER</mat-option>
+            <mat-option value="CRASH">CRASH</mat-option>
+            <mat-option value="MAJOR">MAJOR</mat-option>
+            <mat-option value="MINOR">MINOR</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+      </mat-step>
+      <mat-step [stepControl]="image">
+
+        <ng-template matStepLabel>Image</ng-template>
+        <mat-form-field>
+          <mat-label>Image</mat-label>
+          <input matInput placeholder="Image URL" [formControl]="image"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="onSave()">Submit</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
   </mat-card-content>
 </mat-card>
 
